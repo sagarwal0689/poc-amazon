@@ -42,7 +42,8 @@ public class TestListener extends BaseTest implements ITestListener {
     public void onTestSuccess(ITestResult iTestResult) {
         System.out.println("I am in onTestSuccess method " + getTestMethodName(iTestResult) + " succeed");
         //ExtentReports log operation for passed tests.
-        ExtentTestManager.getTest().log(LogStatus.PASS, "Test passed");
+         ExtentTestManager.getTest().log(LogStatus.PASS, "Test passed");
+
     }
 
     @Override
@@ -60,6 +61,7 @@ public class TestListener extends BaseTest implements ITestListener {
         //ExtentReports log and screenshot operations for failed tests.
         ExtentTestManager.getTest().log(LogStatus.FAIL, "Test Failed",
             ExtentTestManager.getTest().addBase64ScreenShot(base64Screenshot));
+
     }
 
     @Override
@@ -67,6 +69,7 @@ public class TestListener extends BaseTest implements ITestListener {
         System.out.println("I am in onTestSkipped method " + getTestMethodName(iTestResult) + " skipped");
         //ExtentReports log operation for skipped tests.
         ExtentTestManager.getTest().log(LogStatus.SKIP, "Test Skipped");
+
     }
 
     @Override

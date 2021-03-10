@@ -1,5 +1,7 @@
 package com.amazon.tests;
 
+import com.amazon.pages.BasePage;
+import com.amazon.pages.BrowserType;
 import com.amazon.pages.HomePage;
 import com.amazon.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
@@ -10,29 +12,45 @@ import org.testng.annotations.BeforeMethod;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Map;
 
 public class BaseTest {
     public WebDriver driver;
     public HomePage homePage;
     public LoginPage loginPage;
+    public Map<String,String> testData;
+    public Map<String,String> config;
     public WebDriver getDriver() {
         return driver;
     }
-
+    public String path;
     @BeforeClass
-    public void classLevelSetup() {
-        String path= System.getProperty("user.dir");
+    public WebDriver classLevelSetup() {
+        try {
+
+            path=System.getProperty("user.dir");
+            config = BasePage.convertPropertiesToHashMap(path+File.separator+"config.properties");
+            driver=BasePage.setWebDriver(config.get("browser"));
+            return driver;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+/*        String path= System.getProperty("user.dir");
         System.setProperty("webdriver.chrome.driver", path+ File.separator+"executables\\chromedriver.exe");
         System.out.println(path+ File.separator+"executables");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver();*/
+        return driver;
     }
 
     @BeforeMethod
-    public void methodLevelSetup() {
-
+    public void methodLevelSetup()  {
+        path=System.getProperty("user.dir");
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
-        homePage.goToAmazon("https://www.amazon.co.in");
+
+        testData=BasePage.convertPropertiesToHashMap(path+File.separator+"TestData\\testData.properties");
+        homePage.goToAmazon(config.get("URL"));
     }
 
     @AfterClass

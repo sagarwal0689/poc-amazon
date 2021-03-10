@@ -2,18 +2,26 @@ package com.amazon.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+
+import java.io.File;
+import java.util.Map;
 
 public class HomePage extends BasePage{
 
+    String path;
     /**Constructor*/
     public HomePage(WebDriver driver) {
         super(driver);
+
+
     }
 
-    By signInButton = By.id("nav-link-accountList");
-    By signOut = By.id("nav-item-signout");
-    By searchTextBox = By.id("twotabsearchtextbox");
-    By searchResultMessage = By.xpath("//div[contains(@class,'a-spacing-small a-spacing-top-small')]");
+
+    By signIn = By.id(objRepo.get("signIn"));
+    By signOut = By.id(objRepo.get("signOut"));
+    By searchTextBox = By.id(objRepo.get("searchTextBox"));
+    By searchResultMessage = By.xpath(objRepo.get("searchResultMessage"));
 
 
 
@@ -27,16 +35,24 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public LoginPage navigateToLoginPage() {
-        click(signInButton);
-        return new LoginPage(driver);
+    public boolean navigateToLoginPage(String text) {
+        boolean flag=false;
+        if(isElementDisplayed(signIn)) {
+            click(signIn);
+            Assert.assertEquals(getTitleOfPage(),text);
+            flag=true;
+
+        }
+        return flag;
+        //return new LoginPage(driver);
     }
 
     public void clickSignOut(){
         click(signOut);
     }
     public  void signOut(){
-        mouseOver(signInButton);
+        waitForVisibility(signIn);
+        mouseOver(signIn);
         clickSignOut();
     }
      public void searchItem(String item){
