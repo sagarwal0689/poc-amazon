@@ -7,6 +7,10 @@ import org.testng.Assert;
 import java.io.File;
 import java.util.Map;
 
+/**
+ *  Class to contain homepage locators and action methods
+ * @author    Sonal Agarwal
+ */
 public class HomePage extends BasePage{
 
     String path;

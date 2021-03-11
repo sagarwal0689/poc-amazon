@@ -7,6 +7,10 @@ import org.testng.Assert;
 import java.io.File;
 import java.util.Map;
 
+/**
+ *  Class to contain login page locators and action methods
+ * @author    Sonal Agarwal
+ */
 public class LoginPage extends BasePage{
   //  public Map<String,String> testData;
     String path;

@@ -15,6 +15,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ *  Class to contain basic test funtions
+ * @author    Sonal Agarwal
+ */
+
 public class BaseTest {
     public WebDriver driver;
     public HomePage homePage;
@@ -36,10 +41,7 @@ public class BaseTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-/*        String path= System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", path+ File.separator+"executables\\chromedriver.exe");
-        System.out.println(path+ File.separator+"executables");
-        driver = new ChromeDriver();*/
+
         return driver;
     }
 
